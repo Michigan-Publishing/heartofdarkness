@@ -1,0 +1,86 @@
+:root {
+  --skewBackground: 0turn;
+  --scaleBackground: 1;
+}
+
+html {
+  font-size: 16px;
+
+  @media only screen and (min-width: 900px) {
+    font-size: 18px;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    font-size: 20px;
+  }
+}
+
+body {
+  line-height: 1.5rem;
+  margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+body.modalOpen {
+  height: 100vh;
+  overflow: hidden;
+}
+
+blockquote {
+  background: #307382;
+  border-left: 0.75rem solid #ccc;
+  margin: 1.5em 0;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
+blockquote p {
+  display: inline;
+}
+
+blockquote a {
+  text-decoration: none;
+}
+
+blockquote a:link,
+blockquote a:hover,
+blockquote a:visited {
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.4);
+}
+
+a,
+a:visited,
+a:hover {
+  color: #fff;
+}
+
+footer a,
+footer a:visited,
+footer a:hover {
+  color: #0f384a;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 2.5rem;
+}
+
+/* IE styles */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  #heading-wrapper {
+    position: relative;
+  }
+}
