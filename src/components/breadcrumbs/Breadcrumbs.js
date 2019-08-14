@@ -5,10 +5,10 @@ import palette from "../../utils/palette"
 import { TABLET_LANDSCAPE_WIDTH } from "../../constants"
 
 const BreadcrumbWrapper = styled.div`
-  margin: 0.75rem 0;
+  margin: 0.75rem 0 0 32px;
   display: flex;
   flex-direction: row;
-  color: ${palette.white};
+  color: ${({ theme }) => theme.colors.darkBlue}
 
   a,
   a:visited {

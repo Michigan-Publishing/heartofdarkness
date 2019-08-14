@@ -5,6 +5,13 @@ import styled, { css } from "styled-components"
 import { TABLET_LANDSCAPE_WIDTH } from "../../constants"
 import Heading from "../Heading"
 
+import { LayoutWrapper } from "../LayoutWrapper"
+
+const FooterWrapper = styled.div`
+  background-color: ${({ theme }) => theme.colors.light};
+  padding: 24px;
+`
+
 const LinkContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -62,20 +69,24 @@ function Footer({ links }) {
   }
 
   return (
-    <>
-      <Heading level="2" mb="1rem">
-        Heart of Darkness
-      </Heading>
-      <LinkContainer>
-        {links
-          .sort((a, b) => {
-            return a.title > b.title ? 1 : a.title < b.title ? -1 : 0
-          })
-          .map(link => (
-            <Column key={link.slug}>{getLinkColumn(link, Link)}</Column>
-          ))}
-      </LinkContainer>
-    </>
+    <FooterWrapper>
+      <LayoutWrapper>
+        <Column>
+          <Heading level="2" mb="1rem" color="brandColor">
+            <a href="/">Heart of Darkness</a>
+          </Heading>
+          <LinkContainer>
+            {links
+              .sort((a, b) => {
+                return a.title > b.title ? 1 : a.title < b.title ? -1 : 0
+              })
+              .map(link => (
+                <Column key={link.slug}>{getLinkColumn(link, Link)}</Column>
+              ))}
+          </LinkContainer>
+        </Column>
+      </LayoutWrapper>
+    </FooterWrapper>
   )
 }
 

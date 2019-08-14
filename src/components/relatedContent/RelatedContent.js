@@ -4,13 +4,11 @@ import palette from "../../utils/palette"
 import { TABLET_LANDSCAPE_WIDTH } from "../../constants"
 
 const ContentWrapper = styled.div`
-  background-color: rgba(${palette.rgbRelatedBackground}, 0.9);
-  box-shadow: 0 0 6.5rem rgba(${palette.rgbRelatedBackground}, 100);
-  color: ${palette.white};
+  color: ${({ theme }) => theme.colors.darkBlue};
   padding: 1.5rem;
   max-height: 80vh;
-  width: 50vw;
-  margin: 6rem 0;
+  margin: 1rem 0 6rem 0;
+  width: 85%;
   align-self: center;
 
   @media (max-width: ${TABLET_LANDSCAPE_WIDTH}px) {
@@ -26,11 +24,11 @@ const ContentWrapper = styled.div`
 `
 
 const Link = styled.a`
-  color: ${palette.white};
+  color: ${({ theme }) => theme.colors.darkBlue};
 `
 
 const Heading = styled.h3`
-  color: ${palette.white};
+  color: ${({ theme }) => theme.colors.darkBlue};
   margin: 0;
   font-size: 1.5rem;
   font-weight: 800;

@@ -2,23 +2,54 @@ import React from "react"
 import { storiesOf } from "@storybook/react"
 import { action } from "@storybook/addon-actions"
 import { linkTo } from "@storybook/addon-links"
-import { escapeWithRegexp } from '../../utils/escape';
+import { escapeWithRegexp } from "../../utils/escape"
+
+import imageSrc from "../../pages/quadrant_map.png"
 
 import MapNavigation from "./MapNavigation"
 
 const areas = [
-  { shape: 'rect', href: "/?path=/story/contentpage--default", coords: "[ 0, 0, 410, 154 ]", name: "40w 20h", alt: "This is the alt" },
-  { shape: 'rect', href: "/?path=/story/contentpage--default", coords: "[ 411, 0, 1024, 309 ]", name: "60w 40h", alt: "This is the alt" },
-  { shape: 'rect', href: "/?path=/story/contentpage--default", coords: "[ 0, 155, 410, 768 ]", name: "40w 80h", alt: "This is the alt" },
-  { shape: 'rect', href: "/?path=/story/contentpage--default", coords: "[ 411, 310, 1024, 768 ]", name: "60w 60h", alt: "This is the alt" },
-];
+  {
+    shape: "rect",
+    href: "/?path=/story/contentpage--default",
+    coords: "[ 0, 0, 496, 435 ]",
+    name: "Previous Explorations",
+    alt: "Visit previous explorations",
+  },
+  {
+    shape: "rect",
+    href: "/?path=/story/contentpage--default",
+    coords: "[ 502, 0, 907, 390 ]",
+    name: "Current Excavations",
+    alt: "Visit current excavations",
+  },
+  {
+    shape: "rect",
+    href: "/?path=/story/contentpage--default",
+    coords: "[ 0, 443, 502, 670 ]",
+    name: "Introduction to the Gabii Project",
+    alt: "Visit an introduction to the Gabii project",
+  },
+  {
+    shape: "rect",
+    href: "/?path=/story/contentpage--default",
+
+    coords: "[ 502, 390, 907, 670 ]",
+    name: "The Environment of Gabii",
+    alt: "Visit the environment of Gabii",
+  },
+]
 
 var MAP = {
-	name: 'my-map',
-	areas
-};
+  name: "Gabii Navigation",
+  areas,
+}
 
 storiesOf("MapNavigation", module).add("default", () => (
-  <MapNavigation imageSrc="https://www.fillmurray.com/1024/768" 
-    map={escapeWithRegexp(JSON.stringify(MAP))} />
+  <>
+    <MapNavigation
+      imageSrc={imageSrc}
+      map={escapeWithRegexp(JSON.stringify(MAP))}
+    />
+  </>
 ))

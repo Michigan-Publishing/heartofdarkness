@@ -8,11 +8,13 @@ export const variants = {
 }
 
 const defaultStyle = css`
-  background-color: ${({ theme }) => theme.colors.brandColor};
+  font-family: "Russo One", sans-serif;
+  background-color: ${({ theme }) => theme.colors.dark};
   color: ${({ theme }) => theme.colors.white};
 `
 
 const alternateStyle = css`
+  font-family: "Russo One", sans-serif;
   background-color: ${({ theme }) => theme.colors.white};
   color: ${({ theme }) => theme.colors.brandColor};
   border: 2px solid ${({ theme }) => theme.colors.brandColor};

@@ -3,10 +3,11 @@ import { Link as GatsbyLink } from "gatsby"
 import styled from "styled-components"
 import palette from "../../utils/palette"
 import { TABLET_LANDSCAPE_WIDTH } from "../../constants"
+import Heading from "../Heading"
 
 export const Link = styled(GatsbyLink)`
-  color: ${palette.white};
-  font-size: 2rem;
+  color: ${({ theme }) => theme.colors.darkBlue};
+  font-size: 1.3rem;
   text-decoration: none;
   position: flex;
 `
@@ -22,18 +23,15 @@ const ListContainer = styled.ul`
 `
 
 export const LinkBackground = `
-  background-color: rgba(${palette.rgbContentBackground}, 0.8);
   padding: 1.5rem;
   border-radius: 1.5rem;
 `
 
 const ListItem = styled.li`
-  ${LinkBackground}
   display: block;
   float: left;
   clear: both;
-  margin-bottom: 2rem;
-  margin-left: ${props => props.left}%;
+  margin-bottom: 1rem;
 
   @media (max-width: ${TABLET_LANDSCAPE_WIDTH}px) {
     margin-left: 0.5rem;
@@ -72,17 +70,22 @@ export default class extends Component {
       return null
     }
     return (
-      <ListContainer ref={node => (this.container = node)}>
-        {linkProperties.map((link, index) => (
-          <ListItem
-            key={link.href}
-            left={getRandomInt(35)}
-            top={index * paddingHeight}
-          >
-            <Link to={link.href}>{link.title}</Link>
-          </ListItem>
-        ))}
-      </ListContainer>
+      <>
+        <Heading mx="2rem" level="2" color="darkBlue">
+          Continue to:
+        </Heading>
+        <ListContainer ref={node => (this.container = node)}>
+          {linkProperties.map((link, index) => (
+            <ListItem
+              key={link.href}
+              left={getRandomInt(35)}
+              top={index * paddingHeight}
+            >
+              <Link to={link.href}>{link.title}</Link>
+            </ListItem>
+          ))}
+        </ListContainer>
+      </>
     )
   }
 }
