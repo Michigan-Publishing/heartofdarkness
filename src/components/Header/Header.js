@@ -3,16 +3,18 @@ import styled from "styled-components"
 import { Box, Flex } from "rebass"
 import Logo from "../logo"
 import { Text } from "../text/Text"
+import { LayoutWrapper } from "../LayoutWrapper"
 
 const HeaderContainer = styled(Flex)`
-  background-color: ${({ theme }) => theme.colors.white};
+  padding: 10px 0;
+  background-color: ${({ theme }) => theme.colors.light};
   color: ${({ theme }) => theme.colors.brandColor};
-  height: 200px;
+  min-height: 120px;
 
   ${Box}:nth-child(2) {
     text-align: right;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
     align-items: center;
   }
 
@@ -24,11 +26,19 @@ const HeaderContainer = styled(Flex)`
 function Header({ children }) {
   return (
     <HeaderContainer>
-      <Box width={[1, 1 / 2]} style={{ display: "flex", alignItems: "center" }}>
-        <Logo variant="dark" width="auto" height="100%" />
-        <Text fontSize={3}>Heart of Darkness</Text>
-      </Box>
-      <Box width={[1, 1 / 2]}>{children}</Box>
+      <LayoutWrapper>
+        <Box
+          width={[1, 1 / 2]}
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          <a href="/">
+            <Logo variant="dark" alt="Heart of Darkness Home" />
+          </a>
+        </Box>
+        <Box width={[1, 1 / 2]} alignItems="flex-end">
+          {children}
+        </Box>
+      </LayoutWrapper>
     </HeaderContainer>
   )
 }

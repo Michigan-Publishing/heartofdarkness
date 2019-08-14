@@ -42,8 +42,8 @@ export default {
   ],
   pattern: new RegExp(`:::md-component MapNavigation name="(.*?)" imageSrc="(.*?)" map="(.*)"`),
   fromBlock: function(match) {
-    const map = JSON.parse(unescapeWithRegexp(match[3]));
-    console.log('MAP', map); 
+    const mapVal = match[3];
+    const map = JSON.parse(unescapeWithRegexp((mapVal || '') == '' ? '{}' : mapVal));
     return {
       name: unescapeWithRegexp(match[1]),
       imageSrc: unescapeWithRegexp(match[2]),

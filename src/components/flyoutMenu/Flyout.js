@@ -1,15 +1,29 @@
 import React, { Component, Fragment } from "react"
-import styled from "styled-components"
-import { Link } from "gatsby"
-
+import styled, { createGlobalStyle } from "styled-components"
+import { Link, useStaticQuery } from "gatsby"
 import palette from "../../utils/palette"
 import { Backdrop, Menu, MenuConsumer } from "react-flyout-menu"
+
+const GlobalStyle = createGlobalStyle`
+  #main-menu {
+    background-color: ${props => props.theme.colors.dark};
+    z-index: 1001;
+
+    & a {
+      color: ${({ theme }) => theme.colors.white} !important;
+    }
+    & a.menu-close {
+      background-color: ${props => props.theme.colors.brandColor};
+    }
+  }
+
+`
 
 const Heading = styled.h2`
   display: flex;
   width: 100%;
   text-align: center;
-  color: ${palette.yellow};
+  color: ${palette.white};
   justify-content: center;
 `
 
@@ -30,7 +44,7 @@ const LinkWrapper = styled.div`
   font-size: ${props => 1.4 - 0.1 * props.depth}rem;
   flex-direction: ${props => (props.depth >= 1 ? "row" : "column")};
   font-weight: ${props => (props.depth >= 1 ? "normal" : "bold")};
-  opacity: ${props => (props.depth >= 1 ? 0.8 : 0.6)};
+  opacity: 1;
   color: #fff;
   padding-left: ${props => (props.depth >= 1 ? 1 : 0)}rem;
   padding-top: ${props => (props.depth < 1 ? 0.5 : 0)}rem;
@@ -70,6 +84,16 @@ export default class extends Component {
   render() {
     const { items } = this.props
 
+    // const data = useStaticQuery(graphql`
+    //   query HeaderQuery {
+    //     site {
+    //       siteMetadata {
+    //         title
+    //       }
+    //     }
+    //   }
+    // `)
+    // debugger
     const sortedItems = items.sort((a, b) => {
       return a.title > b.title ? 1 : a.title < b.title ? -1 : 0
     })
@@ -80,6 +104,7 @@ export default class extends Component {
         {({ toggleElement, setCloseElement }) => {
           return (
             <Fragment>
+              <GlobalStyle />
               <Menu
                 setCloseElement={setCloseElement}
                 toggleElement={toggleElement}

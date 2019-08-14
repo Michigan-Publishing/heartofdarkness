@@ -1,5 +1,5 @@
 import React from "react"
-import marksy from "marksy/components"
+import marksy from "marksy/jsx"
 import { FulcrumImageVideo, FulcrumTextAudio } from "../fulcrum"
 import AboutTheAuthor from "../aboutTheAuthor"
 import MapNavigation from "../MapNavigation"

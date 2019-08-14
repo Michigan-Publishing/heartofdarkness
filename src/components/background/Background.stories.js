@@ -7,7 +7,7 @@ import { linkTo } from "@storybook/addon-links"
 import Background from "./Background"
 
 storiesOf("Background", module).add("default", () => (
-  <div style={{ width: 600, height: 600 }}>
+  <div style={{ width: 1600, height: 1600 }}>
     <Background>This is some text in the background</Background>
   </div>
 ))

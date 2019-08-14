@@ -1,5 +1,5 @@
 import React from "react"
-import src from "./primary.svg"
+import src from "./Logo.png"
 
 export const variants = {
   primary: "primary",
@@ -8,7 +8,7 @@ export const variants = {
 }
 
 function Logo({ variant = variants.primary, ...props }) {
-  return <img src={require(`./${variant}.svg`)} alt="logo" {...props} />
+  return <img src={src} alt="Heart of Darkness" {...props} />
 }
 
 export default Logo
