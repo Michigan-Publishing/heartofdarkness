@@ -15725,10 +15725,20 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
+typeface-lateef@^0.0.63:
+  version "0.0.63"
+  resolved "https://registry.yarnpkg.com/typeface-lateef/-/typeface-lateef-0.0.63.tgz#e31504f3614c2ffb66d6f13ff38a9d9595c645d9"
+  integrity sha512-NE4hcxkctVaro2I9cg5DOpkCYHb8WJFheLnNwTRcruBrandJi1ocPusrJlqs7lU941sx8bxELMMDPHZf1TrJcg==
+
 typeface-lato@^0.0.54:
   version "0.0.54"
   resolved "https://registry.yarnpkg.com/typeface-lato/-/typeface-lato-0.0.54.tgz#6ea56309a8b0cfdb7e8246e05de4b58b8272b47c"
   integrity sha512-2/oP5YrXCBSLg+N2ZdWnMbJ0PRIidrJVFHgRoLxo5MNsdu9eE4aBwsoEY/K/+9rKdktGO8zpiXBYPRn9F6U/Sw==
+
+typeface-special-elite@^0.0.72:
+  version "0.0.72"
+  resolved "https://registry.yarnpkg.com/typeface-special-elite/-/typeface-special-elite-0.0.72.tgz#4a6f250d67f7bd80d307bcd756a729af0c48710e"
+  integrity sha512-xRtWPqpbFQvxT2Y+1ypYYPJ+FoQqyaWlGtu4U7MGNIQx50sNK2nwbWaR2Y+KVe13vzdcJd4ZbzvX5cLJ8y7toA==
 
 ua-parser-js@^0.7.18:
   version "0.7.19"
