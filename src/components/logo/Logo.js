@@ -8,7 +8,15 @@ export const variants = {
 }
 
 function Logo({ variant = variants.primary, ...props }) {
-  return <img src={src} alt="Heart of Darkness" {...props} />
+  return (
+    <img
+      src={src}
+      alt="Heart of Darkness"
+      {...props}
+      height={120}
+      width="auto"
+    />
+  )
 }
 
 export default Logo

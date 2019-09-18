@@ -53,7 +53,8 @@
     "smoothscroll-polyfill": "^0.4.3",
     "styled-components": "^4.0.2",
     "styled-system": "^4.1.0",
-    "typeface-lato": "^0.0.54"
+    "typeface-lateef": "^0.0.63",
+    "typeface-special-elite": "^0.0.72"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
