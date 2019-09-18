@@ -1,6 +1,7 @@
 import React from "react"
 import { createGlobalStyle, ThemeProvider } from "styled-components"
-require("typeface-lato")
+require("typeface-lateef")
+require("typeface-special-elite")
 
 const colors = {
   light: "#F0E8D6",
@@ -19,9 +20,9 @@ const colors = {
   blackTranslucent: "rgba(17, 20, 23, .9)",
 }
 const fonts = {
-  heading: '"Russo One", Helvetica, sans-serif',
+  heading: '"Special Elite", Helvetica, sans-serif',
   sans: "Helvetica, Arial, sans-serif",
-  serif: '"adobe-garamond-pro", Georgia, serif',
+  serif: '"Lateef", Georgia, serif',
 }
 
 const settings = {
