@@ -15,12 +15,21 @@ const FooterWrapper = styled.div`
 const LinkContainer = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
   line-height: 1.4rem;
+  font-weight: normal;
+  font-size: 1.3rem;
 
   & a {
     color: ${({ theme }) => theme.colors.brandColor};
+    text-decoration-style: dotted;
+  }
+
+  & a:hover {
+    background-color: ${({ theme }) => theme.colors.dark};
+    color: ${({ theme }) => theme.colors.light};
   }
 
   @media (max-width: ${TABLET_LANDSCAPE_WIDTH}px) {
@@ -32,7 +41,7 @@ const Column = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 2rem;
-  min-width: 10rem;
+  margin-bottom: 1rem;
 
   @media (max-width: ${TABLET_LANDSCAPE_WIDTH}px) {
     min-width: unset;
@@ -53,12 +62,6 @@ function getLinkColumn(link) {
       <Link to={link.slug}>
         <strong>{link.title}</strong>
       </Link>
-      {link.children &&
-        link.children.map(childLink => (
-          <ChildLink key={childLink.slug} to={childLink.slug}>
-            {childLink.title}
-          </ChildLink>
-        ))}
     </Fragment>
   )
 }
@@ -71,20 +74,17 @@ function Footer({ links }) {
   return (
     <FooterWrapper>
       <LayoutWrapper>
-        <Column>
+        <Column style={{ width: "50%" }}>
           <Heading level="2" mb="1rem" color="brandColor">
             <a href="/">Heart of Darkness</a>
           </Heading>
           <LinkContainer>
-            {links
-              .sort((a, b) => {
-                return a.title > b.title ? 1 : a.title < b.title ? -1 : 0
-              })
-              .map(link => (
-                <Column key={link.slug}>{getLinkColumn(link, Link)}</Column>
-              ))}
+            {links.map(link => (
+              <Column key={link.slug}>{getLinkColumn(link, Link)}</Column>
+            ))}
           </LinkContainer>
         </Column>
+        <Column />
       </LayoutWrapper>
     </FooterWrapper>
   )

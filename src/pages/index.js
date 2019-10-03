@@ -70,6 +70,7 @@ export const frontmatter = {
   layoutType: "post",
   key: "explore-gabii",
   parentKey: undefined,
+  sortOrder: 1,
 }
 
 export const query = `

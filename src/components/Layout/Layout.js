@@ -59,7 +59,6 @@ function getNodeTree(nodes, key = null, level = 0) {
     return 0
   })
 
-  debugger
   return output
 }
 

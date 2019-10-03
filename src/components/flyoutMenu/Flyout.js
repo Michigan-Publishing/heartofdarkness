@@ -84,21 +84,7 @@ export default class extends Component {
   render() {
     const { items } = this.props
 
-    // const data = useStaticQuery(graphql`
-    //   query HeaderQuery {
-    //     site {
-    //       siteMetadata {
-    //         title
-    //       }
-    //     }
-    //   }
-    // `)
-    // debugger
-    const sortedItems = items.sort((a, b) => {
-      return a.title > b.title ? 1 : a.title < b.title ? -1 : 0
-    })
-
-    const links = buildLinks(sortedItems)
+    const links = buildLinks(items)
     return (
       <MenuConsumer>
         {({ toggleElement, setCloseElement }) => {
