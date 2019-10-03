@@ -41,14 +41,25 @@ const Content = styled(OriginalLayoutWrapper)`
 function getNodeTree(nodes, key = null, level = 0) {
   const newNodes = nodes.filter(item => item.node.frontmatter.parentKey === key)
 
-  debugger
   const output = newNodes.map(({ node }) => ({
     title: node.frontmatter.title,
     slug: node.fields.slug,
     level: level,
     children: getNodeTree(nodes, node.frontmatter.key, level + 1),
+    sortOrder: node.frontmatter.sortOrder,
   }))
 
+  output.sort((a, b) => {
+    if (a.sortOrder < b.sortOrder) {
+      return -1
+    }
+    if (a.sortOrder > b.sortOrder) {
+      return 1
+    }
+    return 0
+  })
+
+  debugger
   return output
 }
 
@@ -110,6 +121,7 @@ function DataWrapper(props) {
               key
               parentKey
               title
+              sortOrder
             }
           }
         }
