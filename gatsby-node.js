@@ -1,11 +1,11 @@
-const path = require("path");
-const { createFilePath } = require("gatsby-source-filesystem");
-const componentWithMDXScope = require("gatsby-mdx/component-with-mdx-scope");
+const path = require("path")
+const { createFilePath } = require("gatsby-source-filesystem")
+const componentWithMDXScope = require("gatsby-mdx/component-with-mdx-scope")
 
 // Implement the Gatsby API “createPages”. This is called once the
 // data layer is bootstrapped to let plugins create pages from data.
 exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions;
+  const { createPage } = actions
 
   return new Promise((resolve, reject) => {
     // Query for markdown nodes to use in creating pages.
@@ -35,6 +35,7 @@ exports.createPages = ({ graphql, actions }) => {
                     parentKey
                     templateKey
                     title
+                    sortOrder
                   }
                 }
               }
@@ -43,8 +44,7 @@ exports.createPages = ({ graphql, actions }) => {
         `
       ).then(result => {
         if (result.errors) {
-          console.log(JSON.stringify(result.errors));
-          reject(result.errors);
+          reject(result.errors)
         }
 
         // Create pages for each markdown file.
@@ -52,11 +52,18 @@ exports.createPages = ({ graphql, actions }) => {
           const {
             id,
             fields,
-            frontmatter: { templateKey, title, section, key, parentKey }
-          } = node;
-          const slug = fields ? fields.slug : undefined;
-          
-          const template = path.resolve(`./src/templates/${templateKey}.js`);
+            frontmatter: {
+              templateKey,
+              title,
+              section,
+              key,
+              parentKey,
+              sortOrder,
+            },
+          } = node
+          const slug = fields ? fields.slug : undefined
+
+          const template = path.resolve(`./src/templates/${templateKey}.js`)
 
           createPage({
             path: `${slug}`,
@@ -66,86 +73,104 @@ exports.createPages = ({ graphql, actions }) => {
             context: {
               id,
               title,
+              sortOrder,
               slug,
               section,
               key,
-              parentKey
-            }
-          });
-        });
+              parentKey,
+            },
+          })
+        })
       })
-    );
-  });
-};
+    )
+  })
+}
 
 function buildSlug(node, frontMatterNodes) {
   if (!node.frontmatter || !frontMatterNodes) {
-    return null;
+    return null
   }
 
-  let slugBody = node.frontmatter.key;
-  let currentNode = frontMatterNodes[node.frontmatter.key];
+  let slugBody = node.frontmatter.key
+  let currentNode = frontMatterNodes[node.frontmatter.key]
   while (currentNode && currentNode.parentKey) {
-    slugBody = `${currentNode.parentKey}/${slugBody}`;
-    currentNode = frontMatterNodes[currentNode.parentKey];
+    slugBody = `${currentNode.parentKey}/${slugBody}`
+    currentNode = frontMatterNodes[currentNode.parentKey]
   }
 
-  return `/pages/${slugBody}/`;
+  return `/pages/${slugBody}/`
 }
 
 // builds a lookup based on key
 buildFrontmatterLookup = nodes => {
   return nodes.reduce((all, nextNode) => {
     if (!nextNode.frontmatter) {
-      return all;
+      return all
     }
 
     Object.keys(nextNode.frontmatter)
-      .filter((key) => nextNode.frontmatter[key] && typeof nextNode.frontmatter[key] === 'string')
-      .forEach((key) => {
-        nextNode.frontmatter[key] = nextNode.frontmatter[key].replace(new RegExp('\\:\\:\\:md-component (.*)', 'g'), 
+      .filter(
+        key =>
+          nextNode.frontmatter[key] &&
+          typeof nextNode.frontmatter[key] === "string"
+      )
+      .forEach(key => {
+        nextNode.frontmatter[key] = nextNode.frontmatter[key].replace(
+          new RegExp("\\:\\:\\:md-component (.*)", "g"),
           (match, p1) => {
-            return match && p1 ? `<${p1} />` : nextNode.frontmatter[key];
-          });
-      });
+            return match && p1 ? `<${p1} />` : nextNode.frontmatter[key]
+          }
+        )
+      })
 
-      Object.keys(nextNode.frontmatter)
-        .filter((key) => key === 'points')
-        .forEach((key) => {
-          (nextNode.frontmatter[key] || []).forEach((point) => {
-            point.point = point.point == undefined ? point.point : 
-              point.point.replace(new RegExp('\\:\\:\\:md-component (.*)', 'g'), 
-                (match, p1) => {
-                  return match && p1 ? `<${p1} />` : nextNode.frontmatter[key];
-              });
-          });
-        });
+    Object.keys(nextNode.frontmatter)
+      .filter(key => key === "points")
+      .forEach(key => {
+        ;(nextNode.frontmatter[key] || []).forEach(point => {
+          point.point =
+            point.point == undefined
+              ? point.point
+              : point.point.replace(
+                  new RegExp("\\:\\:\\:md-component (.*)", "g"),
+                  (match, p1) => {
+                    return match && p1 ? `<${p1} />` : nextNode.frontmatter[key]
+                  }
+                )
+        })
+      })
 
     return {
       ...all,
-      [nextNode.frontmatter.key]: nextNode.frontmatter
-    };
-  }, {});
-};
+      [nextNode.frontmatter.key]: nextNode.frontmatter,
+    }
+  }, {})
+}
 
-exports.onCreateNode = ({ node, actions: { createNodeField }, getNode, getNodes }) => {
+exports.onCreateNode = ({
+  node,
+  actions: { createNodeField },
+  getNode,
+  getNodes,
+}) => {
   if (node.internal.type === `MarkdownRemark` || node.internal.type === `Mdx`) {
-    const value = createFilePath({ node, getNode });
-    const nodes = getNodes();
+    const value = createFilePath({ node, getNode })
+    const nodes = getNodes()
 
-    const frontMatterLookup = buildFrontmatterLookup(nodes);
-    const slug = buildSlug(node, frontMatterLookup) || value;
+    const frontMatterLookup = buildFrontmatterLookup(nodes)
+    const slug = buildSlug(node, frontMatterLookup) || value
 
-    node.rawBody = node.rawBody.replace(new RegExp('\\:\\:\\:md-component (.*)', 'g'), 
+    node.rawBody = node.rawBody.replace(
+      new RegExp("\\:\\:\\:md-component (.*)", "g"),
       (match, p1) => {
-        return match && p1 ? `<${p1} />` : node.rawBody;
-    });
+        return match && p1 ? `<${p1} />` : node.rawBody
+      }
+    )
 
     createNodeField({
       name: `slug`,
       node,
-      value: slug
-    });
+      value: slug,
+    })
 
     // const parentSlug = createNodeField({
     //   name: `parent`,
@@ -153,4 +178,4 @@ exports.onCreateNode = ({ node, actions: { createNodeField }, getNode, getNodes 
     //   parentSlug
     // });
   }
-};
+}

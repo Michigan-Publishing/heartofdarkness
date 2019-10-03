@@ -46,7 +46,18 @@ function getNodeTree(nodes, key = null, level = 0) {
     slug: node.fields.slug,
     level: level,
     children: getNodeTree(nodes, node.frontmatter.key, level + 1),
+    sortOrder: node.frontmatter.sortOrder,
   }))
+
+  output.sort((a, b) => {
+    if (a.sortOrder < b.sortOrder) {
+      return -1
+    }
+    if (a.sortOrder > b.sortOrder) {
+      return 1
+    }
+    return 0
+  })
 
   return output
 }
@@ -109,6 +120,7 @@ function DataWrapper(props) {
               key
               parentKey
               title
+              sortOrder
             }
           }
         }

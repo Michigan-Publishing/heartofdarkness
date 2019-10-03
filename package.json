@@ -13,7 +13,8 @@
     "serve": "gatsby serve",
     "deploy": "gatsby build && node deployPublicSite.js",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "clean": "rm -rf .cache"
   },
   "dependencies": {
     "@mdx-js/mdx": "^0.15.5",
