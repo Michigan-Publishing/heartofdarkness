@@ -41,6 +41,7 @@ const Content = styled(OriginalLayoutWrapper)`
 function getNodeTree(nodes, key = null, level = 0) {
   const newNodes = nodes.filter(item => item.node.frontmatter.parentKey === key)
 
+  debugger
   const output = newNodes.map(({ node }) => ({
     title: node.frontmatter.title,
     slug: node.fields.slug,

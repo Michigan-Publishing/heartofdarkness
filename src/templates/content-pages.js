@@ -165,6 +165,7 @@ export const pageQuery = graphql`
             title
             key
             parentKey
+            sortOrder
           }
         }
       }
@@ -195,6 +196,7 @@ export const pageQuery = graphql`
             title
             key
             parentKey
+            sortOrder
           }
         }
       }
