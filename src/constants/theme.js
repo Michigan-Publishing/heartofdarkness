@@ -20,7 +20,7 @@ const colors = {
 }
 const fonts = {
   heading: '"Special Elite", Helvetica, sans-serif',
-  sans: "Helvetica, Arial, sans-serif",
+  sans: '"Cormorant Garamond", Helvetica, Arial, sans-serif',
   serif: '"Cormorant Garamond", Georgia, serif',
 }
 
