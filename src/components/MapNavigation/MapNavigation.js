@@ -44,6 +44,7 @@ export default class MapNavigation extends Component {
         {map.areas.map(item => (
           <Button
             as="a"
+            key={item.href}
             href={item.href}
             style={{ color: "#FFF" }}
             width="100%"

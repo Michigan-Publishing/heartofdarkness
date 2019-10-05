@@ -8,35 +8,18 @@ import styled from "styled-components"
 import welles from "./welles.jpg"
 import Heading from "../components/Heading"
 
-const links = [
-  {
-    href: "/pages/explore-gabii/previous-explorations/",
-    name: "Previous Explorations",
-    alt: "Visit previous explorations",
-  },
-  {
-    href: "/pages/explore-gabii/current-excavations/",
-    name: "Current Excavations",
-    alt: "Visit current excavations",
-  },
-  {
-    href: "/pages/explore-gabii/the-gabii-project/",
-    name: "Introduction to the Gabii Project",
-    alt: "Visit an introduction to the Gabii project",
-  },
-  {
-    href: "/pages/explore-gabii/the-environmant-of-gabii/",
-    name: "The Environment of Gabii",
-    alt: "Visit the environment of Gabii",
-  },
-]
+export const Main = props => {
+  const links = props.links.map(link => ({
+    href: link.slug,
+    name: link.title,
+    alt: link.title,
+  }))
 
-var navigation = {
-  name: "Main Navigation",
-  links,
-}
+  var navigation = {
+    name: "Main Navigation",
+    links,
+  }
 
-export default props => {
   return (
     <Layout>
       <Layout.Content my={24} p={20}>
@@ -64,14 +47,64 @@ export default props => {
   )
 }
 
-export const frontmatter = {
+function getNodeTree(nodes, key = null, level = 0) {
+  const newNodes = nodes.filter(item => item.node.frontmatter.parentKey === key)
+
+  const output = newNodes.map(({ node }) => ({
+    title: node.frontmatter.title,
+    slug: node.fields.slug,
+    level: level,
+    children: getNodeTree(nodes, node.frontmatter.key, level + 1),
+    sortOrder: node.frontmatter.sortOrder,
+  }))
+
+  output.sort((a, b) => {
+    if (a.sortOrder < b.sortOrder) {
+      return -1
+    }
+    if (a.sortOrder > b.sortOrder) {
+      return 1
+    }
+    return 0
+  })
+
+  return output
+}
+
+function DataWrapper(props) {
+  const data = useStaticQuery(graphql`
+    query IndexQuery {
+      allMdx {
+        edges {
+          node {
+            id
+            fields {
+              slug
+            }
+            frontmatter {
+              key
+              parentKey
+              title
+              sortOrder
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  const nodes = getNodeTree(data.allMdx.edges)
+
+  return <Main {...props} links={nodes[0].children} />
+}
+
+DataWrapper.frontmatter = {
   title: "Explore Gabii",
   written: "2019-04-01",
   layoutType: "post",
   key: "explore-gabii",
   parentKey: undefined,
+  sortOrder: 1,
 }
 
-export const query = `
-
-`
+export default DataWrapper

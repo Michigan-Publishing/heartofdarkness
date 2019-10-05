@@ -1,8 +1,7 @@
 import React from "react"
 import { createGlobalStyle, ThemeProvider } from "styled-components"
-require("typeface-lateef")
 require("typeface-special-elite")
-
+require("typeface-cormorant-garamond")
 const colors = {
   light: "#F0E8D6",
   dark: "#474135",
@@ -22,7 +21,7 @@ const colors = {
 const fonts = {
   heading: '"Special Elite", Helvetica, sans-serif',
   sans: "Helvetica, Arial, sans-serif",
-  serif: '"Lateef", Georgia, serif',
+  serif: '"Cormorant Garamond", Georgia, serif',
 }
 
 const settings = {

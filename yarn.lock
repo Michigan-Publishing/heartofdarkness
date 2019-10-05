@@ -15725,15 +15725,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typeface-lateef@^0.0.63:
-  version "0.0.63"
-  resolved "https://registry.yarnpkg.com/typeface-lateef/-/typeface-lateef-0.0.63.tgz#e31504f3614c2ffb66d6f13ff38a9d9595c645d9"
-  integrity sha512-NE4hcxkctVaro2I9cg5DOpkCYHb8WJFheLnNwTRcruBrandJi1ocPusrJlqs7lU941sx8bxELMMDPHZf1TrJcg==
-
-typeface-lato@^0.0.54:
-  version "0.0.54"
-  resolved "https://registry.yarnpkg.com/typeface-lato/-/typeface-lato-0.0.54.tgz#6ea56309a8b0cfdb7e8246e05de4b58b8272b47c"
-  integrity sha512-2/oP5YrXCBSLg+N2ZdWnMbJ0PRIidrJVFHgRoLxo5MNsdu9eE4aBwsoEY/K/+9rKdktGO8zpiXBYPRn9F6U/Sw==
+typeface-cormorant-garamond@^0.0.72:
+  version "0.0.72"
+  resolved "https://registry.yarnpkg.com/typeface-cormorant-garamond/-/typeface-cormorant-garamond-0.0.72.tgz#86e1564b87f2d89599ae27cf0b762bae95c99798"
+  integrity sha512-SOImWwsy5h0Vtj8oWMY2KjEnalkA86I7c98UMXplZQ9cTKoq4kfojc/R2B55kzJGhg0uEz0GcbDtFcyQzxTOqg==
 
 typeface-special-elite@^0.0.72:
   version "0.0.72"
