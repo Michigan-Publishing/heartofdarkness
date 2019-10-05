@@ -32,16 +32,4 @@ collections:
         valueField: "key"
         required: false
       - { label: "Body", name: "body", widget: "markdown", required: false }
-      - label: "Points"
-        name: "points"
-        widget: "list"
-        required: false
-        fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Point", name: "point", widget: "markdown" }
-      - {
-          label: "After Points",
-          name: "afterPoints",
-          widget: "markdown",
-          required: false,
-        }
+
