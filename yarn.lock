@@ -15730,6 +15730,11 @@ typeface-cormorant-garamond@^0.0.72:
   resolved "https://registry.yarnpkg.com/typeface-cormorant-garamond/-/typeface-cormorant-garamond-0.0.72.tgz#86e1564b87f2d89599ae27cf0b762bae95c99798"
   integrity sha512-SOImWwsy5h0Vtj8oWMY2KjEnalkA86I7c98UMXplZQ9cTKoq4kfojc/R2B55kzJGhg0uEz0GcbDtFcyQzxTOqg==
 
+typeface-noto-serif@^0.0.72:
+  version "0.0.72"
+  resolved "https://registry.yarnpkg.com/typeface-noto-serif/-/typeface-noto-serif-0.0.72.tgz#798e917662322443cec944ac68e2ebd42c2dd2ec"
+  integrity sha512-mhdlDJQF04V50+/mHwiOR+cVV9jl1ITpZhNMnaQF6CqgzS0ujR3+9Alme3OtT1iZd1kp2iM1VxLtzLKhR0Bh3Q==
+
 typeface-special-elite@^0.0.72:
   version "0.0.72"
   resolved "https://registry.yarnpkg.com/typeface-special-elite/-/typeface-special-elite-0.0.72.tgz#4a6f250d67f7bd80d307bcd756a729af0c48710e"

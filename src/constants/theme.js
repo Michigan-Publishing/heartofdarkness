@@ -2,6 +2,8 @@ import React from "react"
 import { createGlobalStyle, ThemeProvider } from "styled-components"
 require("typeface-special-elite")
 require("typeface-cormorant-garamond")
+require("typeface-noto-serif")
+
 const colors = {
   light: "#F0E8D6",
   dark: "#474135",
@@ -20,8 +22,8 @@ const colors = {
 }
 const fonts = {
   heading: '"Special Elite", Helvetica, sans-serif',
-  sans: '"Cormorant Garamond", Helvetica, Arial, sans-serif',
-  serif: '"Cormorant Garamond", Georgia, serif',
+  sans: '"Noto Serif", Helvetica, Arial, sans-serif',
+  serif: '"Noto Serif", Georgia, serif',
 }
 
 const settings = {
