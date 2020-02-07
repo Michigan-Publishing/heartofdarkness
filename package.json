@@ -55,6 +55,7 @@
     "styled-components": "^4.0.2",
     "styled-system": "^4.1.0",
     "typeface-cormorant-garamond": "^0.0.72",
+    "typeface-noto-serif": "^0.0.72",
     "typeface-special-elite": "^0.0.72"
   },
   "devDependencies": {
