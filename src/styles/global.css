@@ -83,6 +83,20 @@ h6 {
   line-height: 2.5rem;
 }
 
+main p {
+  display: flex;
+}
+
+main p img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+code {
+  max-width: 100%;
+  word-wrap: normal;
+}
+
 /* IE styles */
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
   #heading-wrapper {
