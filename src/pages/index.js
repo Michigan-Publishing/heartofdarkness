@@ -130,8 +130,6 @@ function DataWrapper(props) {
   const nodes = getNodeTree(data.allMdx.edges)
   const { children, body, title } = nodes[0]
 
-  /*console.log("PROPS", props, "LINKS", nodes[0].children)
-  console.log("NODES", nodes)*/
   return <ScopedMain {...props} {...nodes[0]} links={children} />
 }
 
