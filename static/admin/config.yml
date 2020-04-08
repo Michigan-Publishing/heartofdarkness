@@ -31,5 +31,10 @@ collections:
         displayFields: ["title"]
         valueField: "key"
         required: false
+      - {
+          label: "Sort Order",
+          name: "sortOrder",
+          widget: "number",
+          valueType: "int",
+        }
       - { label: "Body", name: "body", widget: "markdown", required: false }
-
