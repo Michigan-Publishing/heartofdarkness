@@ -1,61 +1,88 @@
-import React from "react"
+import React, { Component } from "react"
 import { useStaticQuery } from "gatsby"
 import Layout from "../components/Layout"
 import Navigation from "../components/Navigation"
+import Markdown from "../components/markdown"
 import imageSrc from "./quadrant_map.png"
 import { escapeWithRegexp } from "../utils/escape"
 import styled from "styled-components"
+import MDXRenderer from "gatsby-mdx/mdx-renderer"
+import { withMDXScope } from "gatsby-mdx/context"
 import welles from "./welles.jpg"
 import Heading from "../components/Heading"
 
-export const Main = props => {
-  const links = props.links.map(link => ({
-    href: link.slug,
-    name: link.title,
-    alt: link.title,
-  }))
-
-  var navigation = {
-    name: "Main Navigation",
-    links,
-  }
-
-  return (
-    <Layout>
-      <Layout.Content my={24} p={20}>
-        <Heading>Heart of Darkness</Heading>
-        <p>
-          Commodo labore aliquip occaecat ipsum ex et ea non commodo laboris
-          laboris laborum deserunt non. Commodo voluptate nulla nulla cillum
-          quis consectetur consectetur magna do aute tempor dolore nulla.
-          Deserunt occaecat fugiat fugiat et labore laboris sint est.
-        </p>
-        <img
-          src={welles}
-          width={613}
-          height="auto"
-          style={{ marginBottom: 20 }}
-        />
-        <Navigation
-          ml="auto"
-          mr="auto"
-          imageSrc={imageSrc}
-          navigation={navigation}
-        />
-      </Layout.Content>
-    </Layout>
-  )
+function hasContent(data) {
+  return data.words || getBodyContent(data) != ""
 }
+
+function getBodyContent(data) {
+  const items = data.rawBody.split("---")
+
+  return items.length > 0 ? items[items.length - 1] : ""
+}
+
+function isIE11() {
+  try {
+    return !!window.MSInputMethodContext && !!document.documentMode
+  } catch (ex) {
+    return false
+  }
+}
+
+export class Main extends Component {
+  render() {
+    const links = this.props.links.map(link => ({
+      href: link.slug,
+      name: link.title,
+      alt: link.title,
+    }))
+
+    var navigation = {
+      name: "Main Navigation",
+      links,
+    }
+    const useMarkdownInsteadOfMDX = isIE11() || true
+
+    return (
+      <Layout>
+        <Layout.Content my={24} p={20}>
+          <Heading>{this.props.title}</Heading>
+          <img
+            src={welles}
+            width={613}
+            height="auto"
+            style={{ marginBottom: 20 }}
+          />
+          {hasContent(this.props) &&
+            (useMarkdownInsteadOfMDX ? (
+              <Markdown>{getBodyContent(this.props)}</Markdown>
+            ) : (
+              <MDXRenderer {...this.props}>{this.props.body}</MDXRenderer>
+            ))}
+          <Navigation
+            ml="auto"
+            mr="auto"
+            imageSrc={imageSrc}
+            navigation={navigation}
+          />
+        </Layout.Content>
+      </Layout>
+    )
+  }
+}
+const ScopedMain = withMDXScope(Main)
 
 function getNodeTree(nodes, key = null, level = 0) {
   const newNodes = nodes.filter(item => item.node.frontmatter.parentKey === key)
-
   const output = newNodes.map(({ node }) => ({
     title: node.frontmatter.title,
     slug: node.fields.slug,
     level: level,
     children: getNodeTree(nodes, node.frontmatter.key, level + 1),
     sortOrder: node.frontmatter.sortOrder,
+    rawBody: node.rawBody,
+    body: node.code.body,
+    words: node.wordCount.words,
   }))
 
   output.sort((a, b) => {
@@ -78,6 +105,13 @@ function DataWrapper(props) {
         edges {
           node {
             id
+            rawBody
+            code {
+              body
+            }
+            wordCount {
+              words
+            }
             fields {
               slug
             }
@@ -94,8 +128,11 @@ function DataWrapper(props) {
   `)
 
   const nodes = getNodeTree(data.allMdx.edges)
+  const { children, body, title } = nodes[0]
 
-  return <Main {...props} links={nodes[0].children} />
+  /*console.log("PROPS", props, "LINKS", nodes[0].children)
+  console.log("NODES", nodes)*/
+  return <ScopedMain {...props} {...nodes[0]} links={children} />
 }
 
 DataWrapper.frontmatter = {
