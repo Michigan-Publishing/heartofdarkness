@@ -46,7 +46,6 @@ exports.createPages = ({ graphql, actions }) => {
         if (result.errors) {
           reject(result.errors)
         }
-        console.log(result)
 
         // Create pages for each markdown file.
         result.data.allMdx.edges.forEach(({ node }) => {
