@@ -14,6 +14,7 @@ export default class MapNavigation extends Component {
         {navigation.links.map(item => (
           <Button
             as="a"
+            key={item.href}
             href={item.href}
             style={{ color: "#FFF" }}
             width="100%"

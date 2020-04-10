@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet"
 
 import ContentArea from "../components/contentArea"
 import Navigation from "../components/secondaryNavigation"
+import MainNavigation from "../components/Navigation"
 import SiteContainer from "../components/siteContainer"
 import Markdown from "../components/markdown"
 import RelatedContent from "../components/relatedContent"
@@ -14,6 +15,8 @@ import Breakpoints from "../components/breakpoints"
 import { FulcrumImageVideo, FulcrumTextAudio } from "../components/fulcrum"
 import AboutTheAuthor from "../components/aboutTheAuthor"
 import MapNavigation from "../components/MapNavigation"
+import welles from "../pages/welles.jpg"
+import imageSrc from "../pages/quadrant_map.png"
 
 // eslint-disable-next-line
 import styles from "../styles/global.css"
@@ -87,9 +90,29 @@ class ContentPages extends Component {
 
   render() {
     const {
-      pageContext: { title },
+      pageContext: { title, key },
       data,
     } = this.props
+
+    const links =
+      data.childPages &&
+      data.childPages.edges
+        .map(page => ({
+          href: page.node.fields.slug,
+          name: page.node.frontmatter.title,
+          alt: page.node.frontmatter.title,
+          sortOrder: page.node.frontmatter.sortOrder,
+        }))
+        .sort((a, b) => {
+          if (a.sortOrder < b.sortOrder) {
+            return -1
+          }
+          if (a.sortOrder > b.sortOrder) {
+            return 1
+          }
+          return 0
+        })
+
     const contextComponents = {
       FulcrumImageVideo,
       FulcrumTextAudio,
@@ -100,6 +123,12 @@ class ContentPages extends Component {
     const newProps = { ...{ ...this.props, ...{ scope: newScope } } }
 
     const useMarkdownInsteadOfMDX = isIE11()
+    const isHomepage = key === "heart-of-darkness"
+
+    var navigation = {
+      name: "Main Navigation",
+      links,
+    }
 
     return (
       <Breakpoints>
@@ -117,6 +146,14 @@ class ContentPages extends Component {
           {hasContent(data) && (
             <>
               <h1>{title}</h1>
+              {isHomepage && (
+                <img
+                  src={welles}
+                  width={613}
+                  height="auto"
+                  style={{ marginBottom: 20 }}
+                />
+              )}
               {useMarkdownInsteadOfMDX ? (
                 <Markdown>{getBodyContent(data)}</Markdown>
               ) : (
@@ -124,12 +161,20 @@ class ContentPages extends Component {
               )}
             </>
           )}
-          {shouldShowRelatedContent(data) && (
+          {!isHomepage && shouldShowRelatedContent(data) && (
             <RelatedContent relatedLinks={mapSiblingContent(data)} />
           )}
-          {shouldShowChildLinks(data) && (
+          {!isHomepage && shouldShowChildLinks(data) && (
             <Navigation
               linkProperties={mapLinkProperties(data.childPages.edges)}
+            />
+          )}
+          {isHomepage && (
+            <MainNavigation
+              ml="auto"
+              mr="auto"
+              imageSrc={imageSrc}
+              navigation={navigation}
             />
           )}
         </SiteContainer>
