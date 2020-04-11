@@ -8,7 +8,6 @@ import { escapeWithRegexp } from "../utils/escape"
 import styled from "styled-components"
 import MDXRenderer from "gatsby-mdx/mdx-renderer"
 import { withMDXScope } from "gatsby-mdx/context"
-import welles from "./welles.jpg"
 import Heading from "../components/Heading"
 
 function hasContent(data) {
@@ -47,18 +46,13 @@ export class Main extends Component {
       <Layout>
         <Layout.Content my={24} p={20}>
           <Heading>{this.props.title}</Heading>
-          <img
-            src={welles}
-            width={613}
-            height="auto"
-            style={{ marginBottom: 20 }}
-          />
           {hasContent(this.props) &&
             (useMarkdownInsteadOfMDX ? (
               <Markdown>{getBodyContent(this.props)}</Markdown>
             ) : (
               <MDXRenderer {...this.props}>{this.props.body}</MDXRenderer>
             ))}
+
           <Navigation
             ml="auto"
             mr="auto"
@@ -134,10 +128,10 @@ function DataWrapper(props) {
 }
 
 DataWrapper.frontmatter = {
-  title: "Explore Gabii",
+  title: "Heart of Darkness",
   written: "2019-04-01",
   layoutType: "post",
-  key: "explore-gabii",
+  key: "heart-of-darkness",
   parentKey: undefined,
   sortOrder: 1,
 }
