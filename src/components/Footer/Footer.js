@@ -6,6 +6,7 @@ import { TABLET_LANDSCAPE_WIDTH } from "../../constants"
 import Heading from "../Heading"
 
 import { LayoutWrapper } from "../LayoutWrapper"
+import HumanitiesCollaboratoryLogo from './hc_logo.png';
 
 const FooterWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.light};
@@ -84,7 +85,15 @@ function Footer({ links }) {
             ))}
           </LinkContainer>
         </Column>
-        <Column />
+        <Column style={{ width: '50%'}}>
+        <a href="https://sites.lsa.umich.edu/collaboratory/">
+            <img src={HumanitiesCollaboratoryLogo}
+              alt="Visit the Humanities Collaboratory" />
+          </a>
+          <p>Supported by the Michigan Humanities Collaboratory</p>
+          <small>&copy; Regents of the University of Michigan</small>
+
+        </Column>
       </LayoutWrapper>
     </FooterWrapper>
   )
