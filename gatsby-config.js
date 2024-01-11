@@ -29,7 +29,6 @@ module.exports = {
     "gatsby-transformer-remark",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-offline",
-    "gatsby-plugin-favicon",
     {
       resolve: `gatsby-plugin-compile-es6-packages`,
       options: {
